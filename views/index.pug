@@ -1,0 +1,12 @@
+extends layout
+block content
+    h1 #{title}
+    // each item , index in blog
+    //     h2= index+1 + ")" +  item.title
+    //     div= item.author
+    //     div= item.description
+    each item , index in articles
+        h2= index + 1 + ")" + item.title
+        div= item.author
+        div= item.body
+

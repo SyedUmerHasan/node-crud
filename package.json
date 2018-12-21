@@ -4,7 +4,8 @@
   "description": "CRUD of Express and Node js with PUG template engine ",
   "main": "app.js",
   "scripts": {
-    "test": "node app"
+    "test": "node app",
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
   },
   "homepage": "https://github.com/SyedUmerHasan/CRUD-with-Express-and-Node#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.4.0",
+    "pug": "^2.0.3"
   }
 }
