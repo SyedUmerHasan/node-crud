@@ -1,0 +1,28 @@
+{
+  "name": "nodecrud",
+  "version": "1.0.0",
+  "description": "CRUD of Express and Node js with PUG template engine ",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SyedUmerHasan/CRUD-with-Express-and-Node.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "Expressjs",
+    "PUG-template-engine",
+    "Mean-Stack"
+  ],
+  "author": "Syed Umer Hasan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SyedUmerHasan/CRUD-with-Express-and-Node/issues"
+  },
+  "homepage": "https://github.com/SyedUmerHasan/CRUD-with-Express-and-Node#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
