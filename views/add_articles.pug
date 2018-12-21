@@ -1,7 +1,19 @@
 extends layout
 block content
     h1 #{title}
-    each item , index in blog
-        h2= index+1 + ")" +  item.title
-        div= item.author
-        div= item.description
+    // each item , index in blog
+    //     h2= index+1 + ")" +  item.title
+    //     div= item.author
+    //     div= item.description
+    form(action='/articles/add', method='POST')
+        .form-group
+            label(for='exampleBlogName') Blog Name
+            input#exampleBlogName.form-control(type='text', aria-describedby='BlogName', placeholder='Enter Blog Name', name="BlogName")
+            small#BlogName.form-text.text-muted This name will be posted as the blog title.
+        .form-group
+            label(for='exampleAuthor') Author Name
+            input#exampleAuthor.form-control(type='text', placeholder='Author Name', name="AuthorName")
+        .form-group
+            label(for='BlogContent') Example textarea
+            textarea#BlogContent.form-control(rows='8' , name="BlogContent")
+        button.btn.btn-primary(type='submit') Submit

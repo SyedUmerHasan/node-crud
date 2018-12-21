@@ -1,12 +1,12 @@
 extends layout
 block content
     h1 #{title}
-    // each item , index in blog
-    //     h2= index+1 + ")" +  item.title
-    //     div= item.author
-    //     div= item.description
     each item , index in articles
-        h2= index + 1 + ")" + item.title
-        div= item.author
-        div= item.body
-
+        ul.list-group
+            li.list-group-item
+                .container
+                    .row
+                        .col-md-10.col-sm-10.col-xs-2
+                            a(href="/article/"+item._id)= item.title
+                        .col-md-2.col-sm-2.col-xs-2
+                            a(href="/article/edit/"+item._id, class="btn btn-primary pull-right") Edit

@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/SyedUmerHasan/CRUD-with-Express-and-Node#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.0",
     "pug": "^2.0.3"

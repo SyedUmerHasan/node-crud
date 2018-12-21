@@ -1,0 +1,15 @@
+extends layout
+block content
+    h1 Edit Articles
+    form(action='/editArticles', method='POST')
+        .form-group
+            label(for='exampleBlogName') Blog Name
+            input#exampleBlogName.form-control(type='text', aria-describedby='BlogName', placeholder='Enter Blog Name', name="BlogName", value=articles.title)
+            small#BlogName.form-text.text-muted This name will be posted as the blog title.
+        .form-group
+            label(for='exampleAuthor') Author Name
+            input#exampleAuthor.form-control(type='text', placeholder='Author Name', name="AuthorName" , value=articles.author)
+        .form-group
+            label(for='BlogContent') Example textarea
+            textarea#BlogContent.form-control(rows='8' , name="BlogContent") #{articles.body}
+        button.btn.btn-primary(type='submit') Submit
