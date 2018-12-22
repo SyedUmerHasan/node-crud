@@ -4,7 +4,7 @@ block content
     form(action='/editArticles', method='POST')
         .form-group
             label(for='id') Blog ID
-            input#id.form-control(type='text', aria-describedby='BlogName', placeholder='Enter Blog ID', name="BlogID", value=articles._id)
+            input#id.form-control(type='hidden', aria-describedby='BlogName', placeholder='Enter Blog ID', name="BlogID", value=articles._id)
 
         .form-group
             label(for='exampleBlogName') Blog Name
