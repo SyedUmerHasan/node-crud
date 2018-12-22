@@ -156,7 +156,18 @@ app.post("/editArticles",function (req,res) {
         }
     });
 });
-
+app.get("/article/delete/:id",function (req,res) {
+    let query = {_id : req.params.id};
+    Article.remove(query,function (error) {
+        if(error){
+            console.log("Error in deleting");
+        }
+        else {
+            console.log("Deleted");
+            res.redirect("/");
+        }
+    })
+});
 
 app.listen("3000",function (error) {
     console.log("Server started on 3000");
