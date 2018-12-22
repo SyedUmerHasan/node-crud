@@ -144,7 +144,8 @@ app.post("/editArticles",function (req,res) {
     article.title = req.body.BlogName;
     article.author = req.body.AuthorName;
     article.body = req.body.BlogContent;
-    let query = {_id : req.params.id};
+    let query = {_id : req.body.BlogID};
+    console.log(article);
     Article.update(query,article,function (error) {
         if(error){
             console.log(error);
@@ -153,7 +154,7 @@ app.post("/editArticles",function (req,res) {
             console.log("Data Added");
             res.redirect("/");
         }
-    })
+    });
 });
 
 
