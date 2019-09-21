@@ -14,7 +14,12 @@ html
                         a.nav-link(href='/') Home
                     li.nav-item
                         a.nav-link(href='/addArticles') Add Blogs
+    .row
         .container
+            != messages("message" ,locals)
+            if errors
+                each error , index in errors
+                    div(class="alert alert-danger") #{error.msg}
             block content
             br
             hr

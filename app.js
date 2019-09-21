@@ -1,7 +1,11 @@
 const express  =  require("express");
 const path =  require("path");
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+var flash = require('connect-flash');
+const session = require('express-session');
+const expressValidator = require('express-validator');
+
 // Mongoose connection with database using localhost
 mongoose.connect('mongodb://localhost/nodecrud');
 const app = express();
@@ -12,6 +16,54 @@ app.use(bodyParser.json({ type: 'application/*+json' }));
 
 //Calling Models variables
 let Article = require("./models/articles");
+
+//Express session middleware
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
+var sess = {
+    secret: 'keyboard cat',
+    cookie: {}
+}
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess));
+// Flash Messages middleware
+
+//Express messages middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
+// Express validator Middleware
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value, location) {
+        var namespace = param.split('.'),
+            root = namespace.shift(),
+            formParam = root;
+        while(namespace.length){
+            formParam+=  "[" + namespace.shift() + "]";
+        }
+        return {
+            param : formParam,
+            msg : msg,
+            value : value
+        };
+    }
+}));
+// app.use(express.cookieParser('keyboard cat'));
+// app.use(express.session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
 
 //Set Public Folder
 app.use(express.static(path.join(__dirname,"public")));
@@ -77,6 +129,22 @@ app.get("/article/:id",function (req,res) {
     });
 });
 app.post("/articles/add",function (req, res) {
+    req.checkBody("BlogName" , "Blog Name is required").notEmpty();
+    req.checkBody("AuthorName" , "Author Name is required").notEmpty();
+    req.checkBody("BlogContent" , "Blog Body is required").notEmpty();
+
+    let errors = req.validationErrors();
+    // var article = {};
+    //     article.title = req.body.BlogName;
+    //     article.author = req.body.AuthorName;
+    //     article.body = req.body.BlogConten;
+
+    if(errors){
+        res.render("edit_articles",{
+            errors:errors,
+            title : "Add Blog"
+        });
+    }
     let article = new Article();
     article.title = req.body.BlogName;
     article.author = req.body.AuthorName;
@@ -89,6 +157,7 @@ app.post("/articles/add",function (req, res) {
         }
         else {
             console.log("Data added");
+            req.flash("success", "Article Added");
             res.redirect("/");
         }
     });
